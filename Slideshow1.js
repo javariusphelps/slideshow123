@@ -15,6 +15,8 @@ var slideshow = {
 
 	photoList: ['photo1', 'photo2', 'photo3', 'photo4'],
 
+	PlayInterval: null,
+
 	currentPhotoIndex: 0,
 
 	nextPhoto: function(){
@@ -22,6 +24,7 @@ var slideshow = {
 		 	this.currentPhotoIndex = this.currentPhotoIndex + 1;
 			return this.photoList[this.currentPhotoIndex];
 		}else {
+			this.pause();
 			console.log("End of Slideshow");
 		}
 			
@@ -33,16 +36,32 @@ var slideshow = {
 			this.currentPhotoIndex = this.currentPhotoIndex -1;
 			return (this.photoList[this.currentPhotoIndex]);
 		}else {
+			this.pause();
 			console.log("End of Slideshow");
 		}
 	},
 	getCurrentPhoto: function(){
 		return (this.photoList[this.currentPhotoIndex]);
 
-	}
+	},
  
+	play: function(){
+		console.log('This is a slideshow');
 
-}	
+		var that = this;
+		PlayInterval = setInterval(function(){
+			console.log(that.getCurrentPhoto());
+			that.nextPhoto();
+		}, 2000);
+	},
+
+	pause: function(){
+		clearInterval(PlayInterval)
+	}
+
+}
+	
+slideshow.play();	
 
 // console.log(slideshow.currentPhotoIndex);
 // console.log(slideshow.nextPhoto());
